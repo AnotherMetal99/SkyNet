@@ -17,11 +17,11 @@
         </template>
 
         <div class="sm:flex sm:flex-wrap">
-           <inertia-link :href="route('profile.show', member.username)" class="sm:1/2"
+           <inertia-link :href="route('profiles.show', member.username)" class="sm:w-1/2"
            v-for="(member,index) in members" :key="index">
-             <div class="flex items-center bg-gray-50 px-2 py-3 border-1 border-gray-500 mt-5 hover:bg-gray-400 hover:text-blue-800">
+             <div class="flex items-center bg-gray-50 px-2 py-3 border-l border-gray-500 mt-5 hover:bg-gray-400 hover:text-blue-800">
                 <div class="flex flex-shrink-0">
-                   <img :src="member.profile_photo_url" :alt="member.username" class="h-8 w-8 rounde-full object-cover">
+                   <img :src="member.profile_photo_url" :alt="member.username" class="h-8 w-8 rounded-full object-cover">
                 </div>
                 <div class="flex flex-grow overflow-hidden">
                    <span class="text-lg ml-3">

@@ -2,6 +2,7 @@
 use App\Http\Controllers\User\MemberController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->get('/',[WelcomeController::class, 'show'])->name('welcome');
 
-Route::middleware(['auth:sanctum', 'verified'])->prefix('user')->group(function() {
+Route::middleware(['auth:sanctum'])->prefix('user')->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('profile/{user:username}', [ProfileController::class, 'show'])->name('profiles.show');
-
     Route::get('members', [MemberController::class, 'index'])->name('members.index');
 });
+
+Route::prefix('friends')->name('friends.')->group(function() {
+    Route::get('', [FriendController::class, 'index'])->name('index');
+    Route::post('/{user}', [FriendController::class, 'store'])->name('store');
+    Route::patch('/{user}', [FriendController::class, 'update'])->name('update');
+    Route::get('/{user}', [FriendController::class, 'deny'])->name('deny');
+    Route::delete('/{user}', [FriendController::class, 'destroy'])->name('destroy');
+});
+

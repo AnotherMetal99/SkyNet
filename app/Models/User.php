@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Profile;
+use App\Traits\Friendable;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
+    use Friendable;
     use TwoFactorAuthenticatable;
 
     /**
