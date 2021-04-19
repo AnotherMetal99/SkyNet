@@ -10,12 +10,14 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Profile;
+use App\Traits\Likeable ;
 use App\Traits\Friendable;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
+    use Likeable ;
     use HasProfilePhoto;
     use Notifiable;
     use Friendable;
@@ -85,5 +87,21 @@ class User extends Authenticatable
 
     public function profile(){
        return $this->hasOne(Profile::class);
+    }
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+    
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function scopeFollowers($query){
+        return $query->noAuth()->orWhereIn('id', auth()->user()->friends_ids());
+    }
+
+    public function scopeNoAuth(){
+        return $this->where('id', '!=', auth()->id());
     }
 }

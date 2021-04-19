@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
 
 class DashboardController extends Controller
 {
@@ -15,8 +16,13 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-       return Inertia::render('Dashboard');
+    {  $allPosts = Post::AllPosts()->latest()->paginate();
+       $followers = User::followers()->take(5)->inRandomOrder()->get();
+       
+          return Inertia::render('Dashboard',[
+       'allPosts' => $allPosts ,
+       'followers' => $followers,
+       ]);
     }
 
     /**

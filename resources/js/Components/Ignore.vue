@@ -1,6 +1,6 @@
 <template>
-    <form @submit.prevent="acceptFriend">
-        <friend-button type="submit" class="text-xs">
+    <form @submit.prevent="ignoreRequest">
+        <jet-danger-button type="submit" class="text-xs">
             <fingerprint-spinner
                 :animation-duration="1500"
                 :size="20"
@@ -8,42 +8,39 @@
                 v-if="loading"
             />
             <template v-else>
-                Accept
+                Ignore
+                <icon name="user-minus" class="w-4 h-4 fill-current ml-1"></icon>
             </template>
-        </friend-button>
+        </jet-danger-button>
     </form>
 </template>
 
 <script>
     import { FingerprintSpinner } from 'epic-spinners'
-    import FriendButton from '@/Components/FriendButton'
+    import JetDangerButton from '@/Jetstream/DangerButton'
     export default {
         props: ['profile'],
         components: {
             FingerprintSpinner,
-            FriendButton,
+            JetDangerButton,
         },
         data() {
             return {
-                acceptFriendForm: this.$inertia.form({
-                    user: this.profile
-                }),
                 loading: false
             }
         },
         methods: {
-            acceptFriend() {
+            ignoreRequest() {
                 this.loading = true
-                this.acceptFriendForm.patch(this.route('friends.update', this.profile.id), {
-                    preserveScroll: true,
+                this.$inertia.get(this.route('friends.deny', this.profile.id, {
                     onSuccess:()=>{
                         Toast.fire({
                             icon: 'success',
-                            title: 'Successfully accepted request!'
+                            title: 'Friend request successfully ignored!'
                         })
                         this.loading = false
                     }
-                })
+                }))
             }
         }
     }

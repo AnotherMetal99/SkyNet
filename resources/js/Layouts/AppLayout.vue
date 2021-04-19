@@ -1,9 +1,9 @@
 <template>
     
-        <div class="flex flex-col min-h-screen">
-            <nav class="bg-white border-b border-gray-100 w-full fixed z-20">
+        <div class="flex flex-col min-h-screen bg-gray-100 ">
+            <nav class="bg-white border-b border-black-100 w-full fixed z-20 bg-white">
                 <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
@@ -27,8 +27,16 @@
                             <div class="flex items-center ml-3 relative">
                                 <jet-dropdown align="right" width="48">
                                     <template #trigger>
-                                        <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex items-center text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                            <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
+                                        <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex items-center text-sm  focus:outline-none focus:border-gray-300 transition">
+                                            <div class="flex items-center px-4">
+                                              <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex-shrink-0 mr-3" >
+                                                <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
+                                              </div> 
+                                              <div>
+                                                <div class="font-medium text-base text-gray-800">{{ $page.props.user.name }}</div>
+                                                <div class="font-medium text-sm text-gray-500">{{ $page.props.user.email }}</div>
+                                             </div>
+                                            </div>
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">
@@ -48,8 +56,21 @@
                                             Manage Account
                                         </div>
 
-                                        <jet-dropdown-link :href="route('profile.show')">
+                                        <jet-dropdown-link :href="route('profiles.show',`${this.$page.props.user.username}`)">
                                             Profile
+                                        </jet-dropdown-link>
+
+                                        <jet-dropdown-link :href="route('friends.index')">
+                                            Friends
+                                        </jet-dropdown-link>
+
+                                        <jet-dropdown-link :href="route('members.index')">
+                                            Members
+                                        </jet-dropdown-link>
+                                        
+
+                                        <jet-dropdown-link :href="route('profile.show')">
+                                            Edit
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
@@ -103,8 +124,12 @@
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                Profile
+                            <jet-responsive-nav-link :href="route('members.index')" :active="route().current('members.index')">
+                                Members
+                            </jet-responsive-nav-link>
+
+                           <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
+                                Edit
                             </jet-responsive-nav-link>
 
                             <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
@@ -124,9 +149,9 @@
                 
             <div class="flex flex-wrap pt-16 sm:flex-nowrap">
                 <!-- Sidebar -->
-              <side-bar></side-bar>
+              <!-- <side-bar></side-bar> -->
                 <!-- Page Content -->
-            <main class="bg-gray-200 shadow rounded my-5 py-6 px-4 w-full sm:w-2/3 sm:mx-2 sm:my-3 md:mx-4 md:px-10 lg:mx-auto">
+            <main class="bg-white shadow rounded my-5 py-6 px-4 w-full sm:w-2/3 sm:mx-2 sm:my-3 md:mx-4 md:px-10 lg:mx-auto">
                 <slot></slot>
             </main>
             </div>

@@ -1,5 +1,5 @@
 <template>
- <div class="flex justify-around items-center bg-gray-100 min-h-screen">
+ <div class="flex justify-around items-center bg-black-100 min-h-screen">
      <div>
          <img src="" alt="SkyNet">
      </div>
