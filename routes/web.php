@@ -8,6 +8,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\CommentLikeController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware(['guest'])->get('/', [WelcomeController::class, 'show'])->name('welcome');
+Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('user')->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -58,8 +59,16 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('user')->group(function(
         Route::delete('/{post}', [PostLikeController::class, 'destroy'])->name('destroy');
     });
 
-    
+    Route::prefix('chat/chats')->name('chat-chats.')->group(function() {
+        Route::get('', [ChatController::class, 'index'])->name('index');
+        Route::get('/{chat:slug}', [ChatController::class, 'show'])->name('show');
+        Route::post('/{chat:slug}', [ChatController::class, 'update'])->name('update');
+        Route::post('/{chat:slug}/messages', [ChatController::class, 'store'])->name('store');
+    });
 });
+
+    
+
 
 
 

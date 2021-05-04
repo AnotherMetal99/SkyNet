@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -91,23 +91,27 @@ class CommentController extends Controller
     }
 
      /**
-     * Store a newly created resource in storage.
+     * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Requests\PostRequest  $request
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostRequest $request, Post $post) {
-        if((auth()->user()->id != $request->user_id) && (!auth()->user()->is_friends_with($request->user_id))) {
+    public function destroy($post_id)
+    {    $post = Comment::where('id', $post_id)->first();
+        if((auth()->user()->id != $post->user_id) && (!auth()->user()->is_friends_with($post->user_id))) {
+            return back()->withErrors(['message' => 'You do not have permission to delete this post!']);
+        }
+        if((auth()->user()->id != $post->user_id) && (auth()->user()->id != $post->parent_id)) {
+            return back()->withErrors(['message' => 'You do not have permission to delete this post!']);
+        }
+        if((auth()->user()->id != $post->user_id) && (auth()->user()->id = $post->parent_id)) {
+            $post->delete();
             return back();
         }
-        if((auth()->user()->id != $request->user_id) && (auth()->user()->is_friends_with($request->user_id))) {
-            auth()->user()->comments()->delete($post);
-            return back();
-        }
-        if((auth()->user()->id = $request->user_id)) {
-            auth()->user()->comments()->delete($post);
+        if((auth()->user()->id = $post->user_id)) {
+            $post->delete();
             return back();
         }
     }
+    
 }

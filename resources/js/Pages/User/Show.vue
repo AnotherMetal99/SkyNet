@@ -1,17 +1,30 @@
 <template>
     <page-layout>
         <template #title>
-            <div class="flex justify-between items-center w-full">
-              <h2 class="flex items-end font-semibold text-xl text-gray-800 leading-tight">
-                  <img :src="profile.profile_photo_url" alt="profile.username" class="h-8 w-8 rounded-full object-cover">
-                  <span class="capitalize ml-3">{{ `${profile.username}'s Profile` }}</span> 
-              </h2>
-                <status :profile="profile" :friendsWith="friendsWith" :friendPendingFrom="friendPendingFrom" :friendSentTo="friendSentTo" ></status>
+            <div class="flex justify-between items-center w-full"> 
+                <div class="font-semibold text-gray-800 leading-tight capitalize ml-3">{{ `${profile.name}` }}
+                  <img :src="profile.profile_photo_url" alt="profile.username" class="h-40 w-40 rounded-full object-cover">
+              </div>
+            </div>
+            <div class="capitalize ml-4">Email: {{ `${profile.email}` }}</div> 
+            <div class="capitalize ml-4">Age: {{ `${profile.age}` }}</div>  
+            <div class="capitalize ml-4">Friends: {{`${friends.length}`}}</div> 
+            <div class="capitalize ml-4">Requests: {{`${requests.length}`}}</div> 
+            <div class="flex justify-between items-center w-full"> 
+            <status :profile="profile" :friendsWith="friendsWith" :friendPendingFrom="friendPendingFrom" :friendSentTo="friendSentTo" ></status>
             </div>
         </template>
+          <div>
+            <h3 class="font-semibold text-lg text-gray-800 leading-tight mt-8">
+                Friends:
+            </h3>
+            <block-folow :items="friends"></block-folow>
+          </div>
+
+        <div class="font-semibold text-lg text-gray-800 leading-tight mt-8">
         <form-post :method="submit" :form="form" :text="'Post'"></form-post>
-         <follower :followers="followers"></follower>
         <block-posts :posts="posts.data"></block-posts>
+         </div>
          
     </page-layout>
 </template>
@@ -21,14 +34,14 @@
     import BlockPosts from '@/Components/BlockPosts'
     import Post from '@/Components/Post'
     import FormPost from '@/Components/FormPost'
-    import Follower from '@/Components/Follower.vue'
+    import BlockFolow from '@/Components/BlockFolow'
     import Status from '@/Components/Status'
     export default {
-       props: ['profile','friendsWith','friendPendingFrom','friendSentTo','posts','followers'],
+       props: ['profile','friendsWith','friendPendingFrom','friendSentTo','posts','friends', 'requests'],
         components: {
             PageLayout,
             Status,
-            Follower,
+            BlockFolow,
             BlockPosts,
             Post,
             FormPost 

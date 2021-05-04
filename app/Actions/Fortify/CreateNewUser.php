@@ -27,7 +27,6 @@ class CreateNewUser implements CreatesNewUsers
             'lastname' => ['required', 'string', 'max:50'],
             'username' => ['required', 'string', 'max:50'],
             'age' => ['required'],
-            'gender' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
@@ -45,7 +44,6 @@ class CreateNewUser implements CreatesNewUsers
         Profile::create([
             'user_id' => $user->id,
             'bio' => Str::of($user->name)->slug('-'),
-            'gender' => $input['gender'],
         ]);
 
         return $user;

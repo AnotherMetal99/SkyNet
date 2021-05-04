@@ -70,18 +70,6 @@
                 <jet-input-error :message="form.errors.age" class="mt-2" />
             </div>
 
-            <!-- Gender -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="gender" value="Gender" />
-                <select name="gender" id="gender" class="block focus:border-gray-500 mt-1 w-full" v-model="form.gender">
-                    <option disabled :value="form.gender">{{ form.gender }}</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-                <jet-input-error :message="form.errors.gender" class="mt-2" />
-            </div>
-
-
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="email" value="Email" />
@@ -133,7 +121,6 @@
                     lastname: this.user.lastname,
                     username: this.user.username,
                     age: this.user.age,
-                    gender: this.user.gender,
                     email: this.user.email,
                     photo: null,
                 }),

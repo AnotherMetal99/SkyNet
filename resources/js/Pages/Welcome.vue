@@ -17,7 +17,7 @@
               <inertia-link :href="route('register')" v-if="canRegister" class="text-white bg-gray-800 rounded px-3 py-1 hover:bg-gray-500">Register</inertia-link>
              </template>
          </div>
-         <p class="mt-10">{{ users }} [eoples in SkyNet</p>
+         <p class="mt-10">{{ users }} Peoples in SkyNet</p>
      </div>
  </div>
 

@@ -18,7 +18,13 @@
                                 <jet-nav-link :href="route('dashboard.index')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
+
+                                <jet-nav-link :href="route('friends.index')" :active="route().current('dashboard')">
+                                    Friends
+                                </jet-nav-link>
                             </div>
+
+                            
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:justify-end sm:ml-6 w-1/2">
@@ -62,6 +68,10 @@
 
                                         <jet-dropdown-link :href="route('friends.index')">
                                             Friends
+                                        </jet-dropdown-link>
+
+                                        <jet-dropdown-link :href="route('chat-chats.index')">
+                                            Chats
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('members.index')">
@@ -123,7 +133,21 @@
                             </div>
                         </div>
 
+                        
+
                         <div class="mt-3 space-y-1">
+                       
+                            <jet-responsive-nav-link :href="route('profiles.show',`${this.$page.props.user.username}`)">
+                                Profile
+                            </jet-responsive-nav-link>
+
+                            <jet-responsive-nav-link :href="route('friends.index')">
+                                Friends
+                            </jet-responsive-nav-link>
+                              <jet-responsive-nav-link :href="route('chat-chats.index')">
+                                Chats
+                            </jet-responsive-nav-link>
+
                             <jet-responsive-nav-link :href="route('members.index')" :active="route().current('members.index')">
                                 Members
                             </jet-responsive-nav-link>
@@ -182,11 +206,37 @@
                 showingNavigationDropdown: false,
             }
         },
-
+        mounted() {
+          this.listen()
+        },
         methods: {
+            listen() {
+                Echo.private(`App.Models.User.${this.$page.props.user.id}`)
+                    .notification((notification) => {
+                        let newUnreadNotifications = {
+                            data: {
+                                info: {
+                                    avatar: notification.info.avatar,
+                                    message: notification.info.message,
+                                    link: notification.info.link,
+                                    sent: notification.info.sent,
+                                }
+                            },
+                            id: notification.id
+                        }
+                        this.unreadNotifications.push(newUnreadNotifications)
+                        this.notifications.push(newUnreadNotifications)
+                    })
+            },
             logout() {
                 this.$inertia.post(route('logout'));
             },
         }
     }
 </script>
+
+<style>
+    body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right {
+        top: 60px;
+    }
+</style>

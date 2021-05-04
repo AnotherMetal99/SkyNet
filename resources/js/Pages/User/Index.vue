@@ -29,9 +29,6 @@
             <h3 class="font-semibold text-lg text-gray-800 leading-tight mt-5">
                 Friends:
             </h3>
-            <div v-if="friends.length <= 0">
-                <h3>You have no friends yet.</h3>
-            </div>
             <block-folow :items="friends"></block-folow>
         </div>
     </page-layout>

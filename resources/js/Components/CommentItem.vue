@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex ml-3">
                     <like :item="comment" :method="submitLike"></like>
-                    <dislike :item="comment" :method="submitDislike" class="ml-2"></dislike>
+                    <dislike :item="comment" :method="submitDislike" class="ml-4"></dislike>
                 </div>
             </div>
         </div>

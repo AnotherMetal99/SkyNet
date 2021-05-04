@@ -22,11 +22,9 @@ class ProfileFactory extends Factory
      * @return array
      */
     public function definition() {
-        $gender = ['Male', 'Female'];
         $bio = $this->faker->name;
         return [
             'bio' => Str::of($bio)->slug('-'),
-            'gender' => Arr::random($gender),
         ];
     }
 }

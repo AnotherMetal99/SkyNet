@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Notifications\SomeonePosted;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -47,7 +48,7 @@ class PostController extends Controller
                 'user_id' => auth()->user()->id
             ]);
             $user = User::where('id', $data['user_id'])->first();
-            event(new SomeonePostedEvent($user, auth()->user()));
+            $user->notify(new SomeonePosted($user, auth()->user()));
             return back();
         }
         if((auth()->user()->id = $data['user_id'])) {

@@ -42,9 +42,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'username' => $input['username'],
                 'age' => $input['age'],
             ])->save();
-            $user->profile->forceFill([
-                'gender' => $input['gender'],
-            ])->save();
+           
         }
     }
 
