@@ -6,7 +6,7 @@
         </template>
         <template v-else-if="friendSentTo">
             <h3 class="font-semibold text-md text-gray-800 leading-tight">
-                Pending
+                В ожидании
             </h3>
         </template>
         <template v-else-if="friendsWith">
@@ -19,8 +19,7 @@
                         v-if="loading"
                     />
                     <template v-else>
-                        Unfriend
-                        <icon name="user-minus" class="w-4 h-4 fill-current ml-1"></icon>
+                        Удалить из друзей
                     </template>
                 </jet-danger-button>
             </form>
@@ -35,8 +34,7 @@
                         v-if="loading"
                     />
                     <template v-else>
-                        Add Friend
-                        <icon name="user-plus" class="w-4 h-4 fill-current ml-1"></icon>
+                        Добавить в друзья
                     </template>
                 </add-button>
             </form>
@@ -47,7 +45,7 @@
 <script>
     import { FingerprintSpinner } from 'epic-spinners'
     import Accept from './Accept'
-    import AddButton from '@/Components/AddButton'
+    import AddButton from '@/Components/Dashboard/AddButton'
     import Ignore from './Ignore'
     import JetDangerButton from '@/Jetstream/DangerButton'
     export default {
@@ -78,7 +76,7 @@
                     onSuccess: ()=>{
                         Toast.fire({
                             icon: 'success',
-                            title: 'Friend request sent!'
+                            title: 'Запрос на добавление в друзья отправлен!'
                         })
                         this.loading = false
                     },
@@ -91,7 +89,7 @@
                     onSuccess: ()=>{
                         Toast.fire({
                             icon: 'success',
-                            title: 'Friend has been removed!'
+                            title: 'Друг удален!'
                         })
                         this.loading = false
                     },

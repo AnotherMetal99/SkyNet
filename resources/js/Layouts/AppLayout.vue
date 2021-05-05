@@ -1,6 +1,5 @@
 <template>
-    
-        <div class="flex flex-col min-h-screen bg-gray-100 ">
+        <div class="flex flex-col min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-black-100 w-full fixed z-20 bg-white">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -16,11 +15,15 @@
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard.index')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    Главная
                                 </jet-nav-link>
 
-                                <jet-nav-link :href="route('friends.index')" :active="route().current('dashboard')">
-                                    Friends
+                                <jet-nav-link :href="route('friends.index')">
+                                    Друзья
+                                </jet-nav-link>
+
+                                <jet-nav-link :href="route('chat-chats.index')">
+                                    Чаты
                                 </jet-nav-link>
                             </div>
 
@@ -57,30 +60,18 @@
                                     </template>
 
                                     <template #content>
-                                        <!-- Account Management -->
-                                        <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
-                                        </div>
-
+                                        
                                         <jet-dropdown-link :href="route('profiles.show',`${this.$page.props.user.username}`)">
-                                            Profile
-                                        </jet-dropdown-link>
-
-                                        <jet-dropdown-link :href="route('friends.index')">
-                                            Friends
-                                        </jet-dropdown-link>
-
-                                        <jet-dropdown-link :href="route('chat-chats.index')">
-                                            Chats
+                                            Профиль
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('members.index')">
-                                            Members
+                                            Рекомендации
                                         </jet-dropdown-link>
                                         
 
                                         <jet-dropdown-link :href="route('profile.show')">
-                                            Edit
+                                            Настройки
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
@@ -92,7 +83,7 @@
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <jet-dropdown-link as="button">
-                                                Log Out
+                                                Выйти
                                             </jet-dropdown-link>
                                         </form>
                                     </template>
@@ -116,7 +107,7 @@
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <jet-responsive-nav-link :href="route('dashboard.index')" :active="route().current('dashboard.index')">
-                            Dashboard
+                            Главная
                         </jet-responsive-nav-link>
                     </div>
 
@@ -138,22 +129,22 @@
                         <div class="mt-3 space-y-1">
                        
                             <jet-responsive-nav-link :href="route('profiles.show',`${this.$page.props.user.username}`)">
-                                Profile
+                                Профиль
                             </jet-responsive-nav-link>
 
                             <jet-responsive-nav-link :href="route('friends.index')">
-                                Friends
+                                Друзья
                             </jet-responsive-nav-link>
                               <jet-responsive-nav-link :href="route('chat-chats.index')">
-                                Chats
+                                Чаты
                             </jet-responsive-nav-link>
 
                             <jet-responsive-nav-link :href="route('members.index')" :active="route().current('members.index')">
-                                Members
+                                Рекомендации
                             </jet-responsive-nav-link>
 
                            <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                Edit
+                                Настройки
                             </jet-responsive-nav-link>
 
                             <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
@@ -163,7 +154,7 @@
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <jet-responsive-nav-link as="button">
-                                    Log Out
+                                    Выйти
                                 </jet-responsive-nav-link>
                             </form>
                         </div>
@@ -172,9 +163,6 @@
             </nav>
                 
             <div class="flex flex-wrap pt-16 sm:flex-nowrap">
-                <!-- Sidebar -->
-              <!-- <side-bar></side-bar> -->
-                <!-- Page Content -->
             <main class="bg-white shadow rounded my-5 py-6 px-4 w-full sm:w-2/3 sm:mx-2 sm:my-3 md:mx-4 md:px-10 lg:mx-auto">
                 <slot></slot>
             </main>
@@ -189,7 +177,6 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink'
     import JetNavLink from '@/Jetstream/NavLink'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
-    import SideBar from '@/Components/SideBar'
     
 
     export default {
@@ -198,7 +185,6 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
-            SideBar,
         },
 
         data() {

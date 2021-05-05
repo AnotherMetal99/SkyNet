@@ -36,7 +36,7 @@ class PostRequest extends FormRequest
     public function messages()
     {
         return [
-            'body.required' => 'A message is required',
+            'body.required' => 'Пустое поле. Введите запись!',
         ];
     }
 }

@@ -5,7 +5,6 @@
                 <img class="h-8 w-8 rounded-full object-cover" :src="post.user.profile_photo_url" :alt="post.user.username">
             </inertia-link>
         </div>
-
         <div class="flex-1">
             <div>
                 <div class="flex justify-between">
@@ -13,17 +12,17 @@
                         <inertia-link :href="route('profiles.show', post.user.username)">{{ post.user.username }}</inertia-link>
                     </h2>
                     <div class="relative">
-                        <button type="button" class="focus:outline-none" @click="openMenu = !openMenu">It</button>
+                        <button type="button" class="focus:outline-none" @click="openMenu = !openMenu">Удалить</button>
                         <div v-if="openMenu" class="bg-gray-300 text-sm absolute w-48 right-0 text-gray-700 shadow-lg rounded-md px-4 py-2 hover:bg-gray-700 hover:text-gray-300 transition duration-150 ease-in-out">
                             <form @submit.prevent="deletePost">
                                 <button type="submit" class="flex justify-between items-center w-full focus:outline-none">
-                                    DeletePost
+                                        Удалить
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <p class="bg-gray-100 rounded mt-3 px-3 py-2">{{ post.body }}</p>
+                <p class="bg-gray-100 rounded mt-3 px-3 ">{{ post.body }}</p>
             </div>
 
             <div class="flex items-end my-3">
@@ -31,19 +30,19 @@
                     <span class="text-sm italic">{{ post.created_at  }}</span>
                 </div>
 
-                <div class="flex ml-3">
-                    <like :item="post" :method="submitLike"></like>
-                    <dislike :item="post" :method="submitDislike" class="ml-4"></dislike>
+                <div class="flex ml-4">
+                    <like :item="post" :method="submitLike" ></like>
+                    <dislike :item="post" :method="submitDislike" class="ml-5"></dislike>
                 </div>
             </div>
-            <form-post :method="submit" :form="form" :text="'Comment'"> </form-post>
             <comment :comments="post.comments"></comment>
+            <form-post :method="submit" :form="form" :text="'Добавить'"> </form-post>
         </div>
     </div>
 </template>
 
 <script>
-    import FormPost from '@/Components/FormPost'
+    import FormPost from '@/Components/Dashboard/FormPost'
     import Comment from '@/Components/Comment'
     import Like from '@/Components/Like'
     import Dislike from '@/Components/Dislike'
@@ -59,12 +58,12 @@
         data(){
             return{
                 openMenu:false,
-                deleteForm: this.$inertia.form({
-                    userPost: this.post
-                }),
-               form: this.$inertia.form({
+                form: this.$inertia.form({
                     body: this.body,
                     user_id: this.post.user_id,
+                }),
+                deleteForm: this.$inertia.form({
+                    userPost: this.post
                 }),
                 likeForm: this.$inertia.form({
                     userPost: this.post
@@ -74,20 +73,11 @@
                 })
             }
         },
-        filters: {
-          moment: function (date) {
-            return moment(date).format('MMMM Do YYYY, h:mm:ss a');
-          }
-        },
         methods: {
             submit() {
                 this.form.post(this.route('comments.store', this.post), {
                     preserveScroll: true,
                     onSuccess:()=>{
-                        Toast.fire({
-                            icon: 'success',
-                            title: 'Your comment has successfully been published!'
-                        })
                         this.form.body = null
                     }
                 })
@@ -99,7 +89,7 @@
                     onSuccess:()=>{
                         Toast.fire({
                             icon: 'success',
-                            title: 'Post has successfully been deleted!'
+                            title: 'Запись удалена!'
                         })
                     }
                 })

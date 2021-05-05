@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DateTimeInterface;
 
 class Comment extends Model
 {
     use HasFactory;
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i');
+    }
 
     protected $fillable = ['user_id', 'post_id', 'body'];
 
@@ -52,4 +57,5 @@ class Comment extends Model
     public function likes() {
         return $this->morphMany(Like::class, 'likeable');
     }
+    
 }

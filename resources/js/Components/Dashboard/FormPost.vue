@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="method" class="w-full">
         <div>
-            <textarea name="post" rows="3" class="border rounded px-2 py-2 w-full" :placeholder="`Post something ${$page.props.user.username} ...`" v-model="form.body"></textarea>
+            <textarea name="post" rows="3" class="border rounded px-2 py-2 w-full" :placeholder="`${$page.props.user.username}, оставьте свое мнение`" v-model="form.body"></textarea>
         </div>
         <div class="flex justify-between my-3">
             <div>
@@ -10,8 +10,8 @@
             <div>
                 <add-button type="submit" class="text-xs" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     <fingerprint-spinner
-                        :animation-duration="1500"
-                        :size="20"
+                        :animation-duration="1000"
+                        :size="24"
                         class="text-white"
                         v-if="form.processing"
                     />
@@ -24,7 +24,7 @@
 
 <script>
     import { FingerprintSpinner } from 'epic-spinners'
-    import AddButton from '@/Components/AddButton'
+    import AddButton from '@/Components/Dashboard/AddButton'
     import JetInputError from '@/Jetstream/InputError'
     export default {
         props: ['method', 'form', 'text'],

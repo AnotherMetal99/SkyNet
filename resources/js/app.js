@@ -19,6 +19,7 @@ window.Toast = Swal.mixin({
 
 const el = document.getElementById('app');
 
+
 createApp({
         render: () =>
             h(InertiaApp, {
@@ -29,5 +30,6 @@ createApp({
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
     .mount(el);
+
 
 InertiaProgress.init({ color: '#3b358f' });

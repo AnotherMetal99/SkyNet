@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use DateTimeInterface;
 
 class Post extends Model
 {
@@ -66,5 +66,8 @@ class Post extends Model
         return $this->morphMany(Like::class, 'likeable');
     }
 
-    
+    protected function serializeDate(DateTimeInterface $date)
+   {
+       return $date->format('Y-m-d H:i');
+   }
 }

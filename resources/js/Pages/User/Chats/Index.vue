@@ -3,14 +3,14 @@
         <template #title>
             <div class="flex flex-col">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    <span class="capitalize underline">Chat Rooms</span>
+                    <span >Чат комнаты</span>
                 </h2>
                 <table class="mt-5">
                     <thead>
                         <tr class="border-b border-gray-800">
-                            <th class="text-left pl-3">Room Name:</th>
-                            <th>Active Members:</th>
-                            <th class="text-right pr-3">Join</th>
+                            <th class="text-left pl-3">Название комнат:</th>
+                            <th>Количество людей:</th>
+                            <th class="text-right pr-3">Вход в комнату</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -18,7 +18,7 @@
                             <td class="text-left pl-3 py-3">{{ chat.name }}</td>
                             <td class="text-center py-3">{{ chat.active }}</td>
                             <td class="text-right pr-3 py-3">
-                                <send-button :href="route('chat-chats.show', chat.slug)" class="text-xs">Join</send-button>
+                                <send-button :href="route('chat-chats.show', chat.slug)" class="text-xs">Присоединиться</send-button>
                             </td>
                         </tr>
                     </tbody>

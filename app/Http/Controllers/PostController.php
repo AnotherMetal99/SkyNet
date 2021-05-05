@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Http\Requests\PostRequest;
 use App\Notifications\SomeonePosted;
 use Illuminate\Http\Request;
 
@@ -31,15 +32,15 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {   
         $data = $request->only(['body', 'user_id', 'parent_id']);
         
         if((auth()->user()->id != $data['user_id']) && (!auth()->user()->is_friends_with($request->user_id))) {
-            return back()->withErrors(['message' => 'You must be friends first!']);
+            return back()->withErrors(['message' => 'Вы должны дружить!']);
         }
         if((auth()->user()->id != $data['user_id']) && (auth()->user()->is_friends_with($data['user_id']))) {
             Post::create([
@@ -47,8 +48,6 @@ class PostController extends Controller
                 'parent_id' => $data['user_id'],
                 'user_id' => auth()->user()->id
             ]);
-            $user = User::where('id', $data['user_id'])->first();
-            $user->notify(new SomeonePosted($user, auth()->user()));
             return back();
         }
         if((auth()->user()->id = $data['user_id'])) {
@@ -102,10 +101,10 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if((auth()->user()->id != $post->user_id) && (!auth()->user()->is_friends_with($post->user_id))) {
-            return back()->withErrors(['message' => 'You do not have permission to delete this post!']);
+            return back()->withErrors(['message' => 'У вас нет разрешения на удаление этой записи!']);
         }
         if((auth()->user()->id != $post->user_id) && (auth()->user()->id != $post->parent_id)) {
-            return back()->withErrors(['message' => 'You do not have permission to delete this post!']);
+            return back()->withErrors(['message' => 'У вас нет разрешения на удаление этой записи!']);
         }
         if((auth()->user()->id != $post->user_id) && (auth()->user()->id = $post->parent_id)) {
             $post->delete();

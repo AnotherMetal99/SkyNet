@@ -1,11 +1,11 @@
 <template>
     <jet-form-section @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Информация пользователя
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Обновите информацию в профиле вашей учетной записи и адрес электронной почты.
         </template>
 
         <template #form>
@@ -16,11 +16,11 @@
                             ref="photo"
                             @change="updatePhotoPreview">
 
-                <jet-label for="photo" value="Photo" />
+                <jet-label for="photo" />
 
                 <!-- Current Profile Photo -->
-                <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                <div class="mt-1" v-show="! photoPreview">
+                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-40 w-40 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -30,12 +30,12 @@
                     </span>
                 </div>
 
-                <jet-secondary-button class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
+                <jet-secondary-button class="mt-5 mr-2" type="button" @click.prevent="selectNewPhoto">
+                    Выбрать новую фотографию
                 </jet-secondary-button>
 
                 <jet-secondary-button type="button" class="mt-2" @click.prevent="deletePhoto" v-if="user.profile_photo_path">
-                    Remove Photo
+                    Удалить фото
                 </jet-secondary-button>
 
                 <jet-input-error :message="form.errors.photo" class="mt-2" />
@@ -44,35 +44,35 @@
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Name" />
+                <jet-label for="name" value="Имя" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
 
              <!-- Lastname -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="lastname" value="Lastame" />
+                <jet-label for="lastname" value="Фамилия" />
                 <jet-input id="lastname" type="text" class="mt-1 block w-full" v-model="form.lastname" autocomplete="lastname" />
                 <jet-input-error :message="form.errors.lastname" class="mt-2" />
             </div>
 
              <!-- Username -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="username" value="Username" />
+                <jet-label for="username" value="Ник" />
                 <jet-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" autocomplete="username" />
                 <jet-input-error :message="form.errors.username" class="mt-2" />
             </div>
 
             <!-- Age -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="age" value="Age" />
+                <jet-label for="age" value="Возраст" />
                 <jet-input id="age" type="text" class="mt-1 block w-full" v-model="form.age" autocomplete="age" />
                 <jet-input-error :message="form.errors.age" class="mt-2" />
             </div>
 
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="email" value="Email" />
+                <jet-label for="email" value="Почта" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" />
                 <jet-input-error :message="form.errors.email" class="mt-2" />
             </div>
@@ -80,11 +80,11 @@
 
         <template #actions>
             <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Сохранен.
             </jet-action-message>
 
             <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Сохранить
             </jet-button>
         </template>
     </jet-form-section>

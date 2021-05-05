@@ -9,7 +9,6 @@
             />
             <template v-else>
                 Ignore
-                <icon name="user-minus" class="w-4 h-4 fill-current ml-1"></icon>
             </template>
         </jet-danger-button>
     </form>

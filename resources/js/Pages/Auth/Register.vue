@@ -11,37 +11,37 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="name" value="Name" />
+                <jet-label for="name" value="Имя" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
             </div>
 
             <div>
-                <jet-label for="lastname" value="Lastname" />
+                <jet-label for="lastname" value="Фамилия" />
                 <jet-input id="lastname" type="text" class="mt-1 block w-full" v-model="form.lastname" required autofocus autocomplete="lastname" />
             </div>
 
             <div>
-                <jet-label for="username" value="Username" />
+                <jet-label for="username" value="Ник" />
                 <jet-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" required autofocus autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <jet-label for="age" value="Age" />
+                <jet-label for="age" value="Возраст" />
                 <jet-input id="age" type="text" class="mt-1 block w-full" v-model="form.age" required />
             </div>
 
             <div class="mt-4">
-                <jet-label for="email" value="Email" />
+                <jet-label for="email" value="Почта" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
+                <jet-label for="password" value="Пароль" />
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
+                <jet-label for="password_confirmation" value="Подтвердите пароль" />
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
 
@@ -59,11 +59,11 @@
 
             <div class="flex items-center justify-end mt-4">
                 <inertia-link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
+                    Уже зарегистрированы?
                 </inertia-link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                    Зарегистрироваться
                 </jet-button>
             </div>
         </form>

@@ -7,23 +7,16 @@
               </div>
             </div>
             <div class="capitalize ml-4">Email: {{ `${profile.email}` }}</div> 
-            <div class="capitalize ml-4">Age: {{ `${profile.age}` }}</div>  
-            <div class="capitalize ml-4">Friends: {{`${friends.length}`}}</div> 
-            <div class="capitalize ml-4">Requests: {{`${requests.length}`}}</div> 
+            <div class="capitalize ml-4">Возраст: {{ `${profile.age}` }}</div>  
             <div class="flex justify-between items-center w-full"> 
             <status :profile="profile" :friendsWith="friendsWith" :friendPendingFrom="friendPendingFrom" :friendSentTo="friendSentTo" ></status>
             </div>
         </template>
-          <div>
-            <h3 class="font-semibold text-lg text-gray-800 leading-tight mt-8">
-                Friends:
-            </h3>
-            <block-folow :items="friends"></block-folow>
-          </div>
-
         <div class="font-semibold text-lg text-gray-800 leading-tight mt-8">
-        <form-post :method="submit" :form="form" :text="'Post'"></form-post>
-        <block-posts :posts="posts.data"></block-posts>
+        <form-post :method="submit" :form="form" :text="'Добавить запись'"></form-post>
+        <infinite-scroll @loadMore="loadMorePosts">
+           <block-posts :posts="allPosts.data" :pagination="pagination"></block-posts>
+        </infinite-scroll>
          </div>
          
     </page-layout>
@@ -31,11 +24,11 @@
 
 <script>
     import PageLayout from '@/Layouts/PageLayout'
-    import BlockPosts from '@/Components/BlockPosts'
-    import Post from '@/Components/Post'
-    import FormPost from '@/Components/FormPost'
+    import BlockPosts from '@/Components/Dashboard/BlockPosts'
+    import FormPost from '@/Components/Dashboard/FormPost'
     import BlockFolow from '@/Components/BlockFolow'
     import Status from '@/Components/Status'
+    import InfiniteScroll from '@/Components/InfiniteScroll'
     export default {
        props: ['profile','friendsWith','friendPendingFrom','friendSentTo','posts','friends', 'requests'],
         components: {
@@ -43,8 +36,8 @@
             Status,
             BlockFolow,
             BlockPosts,
-            Post,
-            FormPost 
+            FormPost,
+            InfiniteScroll
         },
          data() {
             return {
@@ -52,7 +45,7 @@
                     body: this.body,
                     user_id: this.profile.id
                 }),
-
+                allPosts: this.posts
             }
         },
         computed: {
@@ -67,11 +60,25 @@
                     onSuccess:()=>{
                         Toast.fire({
                             icon: 'success',
-                            title: 'Your post has successfully been published!'
+                            title: 'Ваша запись добавлена!'
                         })
                         this.form.body = null
                     }
                 })
+            },
+            loadMorePosts() {
+                if (!this.allPosts.next_page_url) {
+                    return
+                }
+                return axios.get(this.allPosts.next_page_url)
+                    .then(resp => {
+                        this.allPosts = {
+                            ...resp.data,
+                            data: [
+                                ...this.allPosts.data, ...resp.data.data
+                            ]
+                        }
+                    })
             }
             
         }

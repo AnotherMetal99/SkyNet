@@ -13,6 +13,7 @@ use App\Models\Profile;
 use App\Traits\Likeable ;
 use App\Traits\Friendable;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens;

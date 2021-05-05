@@ -5,7 +5,7 @@
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+            Забыли Ваш пароль? Без проблем. Просто сообщите нам свой адрес электронной почты, и мы пришлем вам ссылку для сброса пароля, которая позволит вам создать новый.
         </div>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -22,7 +22,7 @@
 
             <div class="flex items-center justify-end mt-4">
                 <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Email Password Reset Link
+                    Отправить ссылку на почту
                 </jet-button>
             </div>
         </form>

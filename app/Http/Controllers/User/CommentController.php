@@ -99,10 +99,10 @@ class CommentController extends Controller
     public function destroy($post_id)
     {    $post = Comment::where('id', $post_id)->first();
         if((auth()->user()->id != $post->user_id) && (!auth()->user()->is_friends_with($post->user_id))) {
-            return back()->withErrors(['message' => 'You do not have permission to delete this post!']);
+            return back()->withErrors(['message' => 'У вас нет разрешения на удаление этого комментария!']);
         }
         if((auth()->user()->id != $post->user_id) && (auth()->user()->id != $post->parent_id)) {
-            return back()->withErrors(['message' => 'You do not have permission to delete this post!']);
+            return back()->withErrors(['message' => 'У вас нет разрешения на удаление этого комментария!']);
         }
         if((auth()->user()->id != $post->user_id) && (auth()->user()->id = $post->parent_id)) {
             $post->delete();

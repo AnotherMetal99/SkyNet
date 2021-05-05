@@ -15,10 +15,13 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {  $allPosts = Post::AllPosts()->latest()->paginate();
+    public function index(Request $request)
+    {  $allPosts = Post::AllPosts()->latest()->paginate(10);
        $followers = User::followers()->take(5)->inRandomOrder()->get();
-       
+
+       if ($request->wantsJson()) {
+        return $allPosts;
+       }
           return Inertia::render('Dashboard',[
        'allPosts' => $allPosts ,
        'followers' => $followers,

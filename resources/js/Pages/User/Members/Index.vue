@@ -3,45 +3,55 @@
         <template #title>
             <div class="flex  flex-col sm:justify-between sm:flex-row items-center">
               <h2 class="flex items-end font-semibold text-xl text-gray-800 leading-tight">
-                  <inertia-link :href="route('members.index')" class="capitalize underline">
-                     Members
-                  </inertia-link>
+                  <span >
+                     Рекомендации
+                  </span>
               </h2>
               <span class="text-gray-800 leading-tight text-lg capitalize mt-5 sm:mt-0">
-                 Visit your
+                 Страница
                  <inertia-link :href="route('friends.index')" class="underline hover:text-green-500">
-                     Friends
+                     друзья
                   </inertia-link>
               </span>
             </div>
         </template>
-
-        <div class="sm:flex sm:flex-wrap">
-           <inertia-link :href="route('profiles.show', member.username)" class="sm:w-1/2"
-           v-for="(member,index) in members" :key="index">
-             <div class="flex items-center bg-white px-2 py-3 border-gray-500 mt-5 hover:bg-gray-200 hover:text-blue-500">
-                <div class="flex flex-shrink-0">
-                   <img :src="member.profile_photo_url" :alt="member.username" class="h-8 w-8 rounded-full object-cover">
-                </div>
-                <div class="flex flex-grow overflow-hidden">
-                   <span class="text-lg ml-3">
-                      {{member.username}}
-                   </span>
-                </div>
-             </div>
-           </inertia-link>
-        </div>
-
-        
+        <infinite-scroll @loadMore="loadMoreMembers">
+           <member :items="allMembers.data"></member>
+        </infinite-scroll>
     </page-layout>
 </template>
 
 <script>
     import PageLayout from '@/Layouts/PageLayout'
+    import Member from '@/Components/Member'
+    import InfiniteScroll from '@/Components/InfiniteScroll'
     export default {
        props: ['members'],
         components: {
             PageLayout,
+            Member,
+            InfiniteScroll
+        },
+        data() {
+            return {
+                allMembers: this.members
+            }
+        },
+        methods: {
+            loadMoreMembers() {
+                if (!this.allMembers.next_page_url) {
+                    return
+                }
+                return axios.get(this.allMembers.next_page_url)
+                    .then(resp => {
+                        this.allMembers = {
+                            ...resp.data,
+                            data: [
+                                ...this.allMembers.data, ...resp.data.data
+                            ]
+                        }
+                    })
+            }
         },
     }
 </script>

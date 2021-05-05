@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col">
-        <h3 class="font-semibold text-lg text-gray-800 leading-tight mt-5">Followers:</h3>
+        <h3 class="font-semibold text-lg text-gray-800 leading-tight mt-5">Рекомендации:</h3>
         <div class="flex mb-2 pb-2">
             <div v-for="user in followers" :key="user.id" class="w-1/4">
                 <inertia-link :href="route('profiles.show', user.username)" class="sm:w-1/2">
