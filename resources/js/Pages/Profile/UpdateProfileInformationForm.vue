@@ -70,6 +70,13 @@
                 <jet-input-error :message="form.errors.age" class="mt-2" />
             </div>
 
+            <!-- Bio -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="bio" value="Bio" />
+                <jet-input id="bio" type="text" class="mt-1 block w-full" v-model="form.bio" autocomplete="bio" />
+                <jet-input-error :message="form.errors.bio" class="mt-2" />
+            </div>
+
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="email" value="Почта" />
@@ -121,6 +128,7 @@
                     lastname: this.user.lastname,
                     username: this.user.username,
                     age: this.user.age,
+                    bio: this.user.bio,
                     email: this.user.email,
                     photo: null,
                 }),

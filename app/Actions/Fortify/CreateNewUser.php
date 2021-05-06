@@ -43,7 +43,6 @@ class CreateNewUser implements CreatesNewUsers
 
         Profile::create([
             'user_id' => $user->id,
-            'bio' => Str::of($user->name)->slug('-'),
         ]);
 
         return $user;

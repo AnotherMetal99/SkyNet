@@ -1,7 +1,7 @@
 <template>
  <div class="flex justify-around items-center bg-black-100 min-h-screen">
      <div>
-         <img src="" alt="SkyNet">
+         <img src="images/el2.png" alt="SkyNet">
      </div>
      <div class="text-center">
          <h1 class="text-4x1">

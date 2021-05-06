@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\FriendRequestAcceptedEvent;
-use App\Events\FriendRequestReceivedEvent;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;

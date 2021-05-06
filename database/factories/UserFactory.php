@@ -21,11 +21,12 @@ class UserFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {   $bio = $this->faker->name;
         return [
             'name' => $this->faker->name,
             'lastname' => $this->faker->lastname,
             'username' => $this->faker->userName,
+            'bio' => Str::of($bio)->slug('-'),
             'age' => $this->faker->randomNumber(2),
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),

@@ -1,18 +1,28 @@
 <template>
     <page-layout>
         <template #title>
-            <div class="flex justify-between items-center w-full"> 
-                <div class="font-semibold text-gray-800 leading-tight capitalize ml-3">{{ `${profile.name}` }}
-                  <img :src="profile.profile_photo_url" alt="profile.username" class="h-40 w-40 rounded-full object-cover">
-              </div>
-            </div>
-            <div class="capitalize ml-4">Email: {{ `${profile.email}` }}</div> 
-            <div class="capitalize ml-4">Возраст: {{ `${profile.age}` }}</div>  
-            <div class="flex justify-between items-center w-full"> 
-            <status :profile="profile" :friendsWith="friendsWith" :friendPendingFrom="friendPendingFrom" :friendSentTo="friendSentTo" ></status>
-            </div>
+            <figure class="md:flex bg-indigo-200 rounded-xl p-8 md:p-8">
+              <img :src="profile.profile_photo_url" alt="profile.username" class="w-32 h-32 md:w-60 md:h-auto  rounded-full mx-auto"  width="384" height="512">
+              <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+              <blockquote>
+              <p class="text-lg">
+                    <div class="font-semibold">{{ `${profile.name}` }}</div> 
+                    <div class="font-semibold ">Возраст: {{ `${profile.age}` }}</div> 
+                    <div class="font-semibold">Email: {{ `${profile.email}` }}</div>
+             </p>
+             </blockquote>
+             <figcaption class="font-medium">
+            <div style="blockquote-footer">
+            О себе: {{ `${profile.bio}` }}
+           </div>
+         <div class="mt-2">
+         <status :profile="profile" :friendsWith="friendsWith" :friendPendingFrom="friendPendingFrom" :friendSentTo="friendSentTo" ></status>
+        </div>
+        </figcaption>
+       </div>
+      </figure>
         </template>
-        <div class="font-semibold text-lg text-gray-800 leading-tight mt-8">
+        <div class="font-semibold text-lg text-gray-800 leading-tight ml-5 mt-8">
         <form-post :method="submit" :form="form" :text="'Добавить запись'"></form-post>
         <infinite-scroll @loadMore="loadMorePosts">
            <block-posts :posts="allPosts.data" :pagination="pagination"></block-posts>
@@ -30,7 +40,7 @@
     import Status from '@/Components/Status'
     import InfiniteScroll from '@/Components/InfiniteScroll'
     export default {
-       props: ['profile','friendsWith','friendPendingFrom','friendSentTo','posts','friends', 'requests'],
+       props: ['profile','friendsWith','friendPendingFrom','friendSentTo','posts', 'requests'],
         components: {
             PageLayout,
             Status,

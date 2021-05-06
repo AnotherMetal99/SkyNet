@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="relative">
-            <button type="button" class="focus:outline-none" @click="openMenu = !openMenu">Удалить</button>
+            <button type="button" class="focus:outline-none" @click="openMenu = !openMenu">...</button>
             <div v-if="openMenu" class="bg-gray-300 text-sm absolute w-48 right-0 text-gray-700 shadow-lg rounded-md px-4 py-2 hover:bg-gray-700 hover:text-gray-300 transition duration-150 ease-in-out">
                 <form @submit.prevent="deleteComment">
                     <button type="submit" class="flex justify-between items-center w-full focus:outline-none">

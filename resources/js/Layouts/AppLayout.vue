@@ -7,8 +7,8 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
-                                <inertia-link :href="route('dashboard.index')" >
-                                    <img src="" alt="Logo">
+                                <inertia-link :href="route('profiles.show',`${this.$page.props.user.username}`)" >
+                                    <div style="font-size: 50px;color: steelblue;">SkyNet</div >
                                 </inertia-link>
                             </div>
 

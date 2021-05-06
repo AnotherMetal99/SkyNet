@@ -9,7 +9,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\CommentLikeController;
 use App\Http\Controllers\ChatController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [WelcomeController::class, 'show'])->name('welcome');
+Route::middleware(['guest'])->get('/', [WelcomeController::class, 'show'])->name('welcome');
 
-Route::middleware(['auth:sanctum', 'verified'])->prefix('user')->group(function() {
+Route::middleware(['auth:sanctum'])->prefix('user')->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::get('profile/{user:username}', [ProfileController::class, 'show'])->name('profiles.show');
