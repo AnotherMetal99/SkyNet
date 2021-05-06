@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware(['guest'])->get('/', [WelcomeController::class, 'show'])->name('welcome');
 
-Route::middleware(['auth:sanctum'])->prefix('user')->group(function() {
+Route::prefix('user')->middleware('auth')->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::get('profile/{user:username}', [ProfileController::class, 'show'])->name('profiles.show');
