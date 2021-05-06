@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {    //\App\Models\User::factory(15)->hasPosts(15)->create();
-         //\App\Models\Comment::factory(10)->create();
-         //\App\Models\Chat::factory(5)->create();
+    {    \App\Models\User::factory(15)->hasPosts(15)->create();
+         \App\Models\Comment::factory(15)->create();
+         \App\Models\Chat::factory(5)->create();
     }
 }

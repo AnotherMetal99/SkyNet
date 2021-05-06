@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware(['guest'])->get('/', [WelcomeController::class, 'show'])->name('welcome');
 
-Route::prefix('user')->group(function() {
+
     Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard.index');
 
     Route::get('profile/{user:username}', [ProfileController::class, 'show'])->middleware('auth')->name('profiles.show');
@@ -64,7 +64,7 @@ Route::prefix('user')->group(function() {
         Route::post('/{chat:slug}', [ChatController::class, 'update'])->name('update');
         Route::post('/{chat:slug}/messages', [ChatController::class, 'store'])->name('store');
     });
-});
+
 
     
 
