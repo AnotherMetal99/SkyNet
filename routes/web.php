@@ -23,29 +23,29 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware(['guest'])->get('/', [WelcomeController::class, 'show'])->name('welcome');
 
-Route::prefix('user')->middleware('auth')->group(function() {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::prefix('user')->group(function() {
+    Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard.index');
 
-    Route::get('profile/{user:username}', [ProfileController::class, 'show'])->name('profiles.show');
+    Route::get('profile/{user:username}', [ProfileController::class, 'show'])->middleware('auth')->name('profiles.show');
 
-    Route::get('members', [MemberController::class, 'index'])->name('members.index');
+    Route::get('members', [MemberController::class, 'index'])->middleware('auth')->name('members.index');
 
-    Route::prefix('posts')->name('posts.')->group(function() {
-        Route::post('', [PostController::class, 'store'])->name('store');
-        Route::delete('/{post}', [PostController::class, 'destroy'])->name('destroy');
+    Route::prefix('posts')->middleware('auth')->name('posts.')->group(function() {
+        Route::post('', [PostController::class, 'store'])->middleware('auth')->name('store');
+        Route::delete('/{post}', [PostController::class, 'destroy'])->middleware('auth')->name('destroy');
     });
 
-    Route::prefix('comments')->name('comments.')->group(function() {
+    Route::prefix('comments')->middleware('auth')->name('comments.')->group(function() {
         Route::post('/{post}/comments', [CommentController::class, 'store'])->name('store');
         Route::delete('/{post}/comments', [CommentController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('comment-like')->name('comment-like.')->group(function() {
+    Route::prefix('comment-like')->middleware('auth')->name('comment-like.')->group(function() {
         Route::post('/{comment}', [CommentLikeController::class, 'store'])->name('store');
         Route::delete('/{comment}', [CommentLikeController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('friends')->name('friends.')->group(function() {
+    Route::prefix('friends')->middleware('auth')->name('friends.')->group(function() {
         Route::get('', [FriendController::class, 'index'])->name('index');
         Route::post('/{user}', [FriendController::class, 'store'])->name('store');
         Route::patch('/{user}', [FriendController::class, 'update'])->name('update');
@@ -53,12 +53,12 @@ Route::prefix('user')->middleware('auth')->group(function() {
         Route::delete('/{user}', [FriendController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('post-like')->name('post-like.')->group(function() {
+    Route::prefix('post-like')->middleware('auth')->name('post-like.')->group(function() {
         Route::post('/{post}', [PostLikeController::class, 'store'])->name('store');
         Route::delete('/{post}', [PostLikeController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('chat/chats')->name('chat-chats.')->group(function() {
+    Route::prefix('chat/chats')->middleware('auth')->name('chat-chats.')->group(function() {
         Route::get('', [ChatController::class, 'index'])->name('index');
         Route::get('/{chat:slug}', [ChatController::class, 'show'])->name('show');
         Route::post('/{chat:slug}', [ChatController::class, 'update'])->name('update');
