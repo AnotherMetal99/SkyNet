@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import PostItem from '@/Components/PostItem'
+import PostItem from '@/Components/Dashboard/PostItem'
     export default {
         props: ['posts'],
         components: {

@@ -43,9 +43,9 @@
 
 <script>
     import FormPost from '@/Components/Dashboard/FormPost'
-    import Comment from '@/Components/Comment'
-    import Like from '@/Components/Like'
-    import Dislike from '@/Components/Dislike'
+    import Comment from '@/Components/Comments/Comment'
+    import Like from '@/Components/Like/Like'
+    import Dislike from '@/Components/Like/Dislike'
   
     export default {
         props: ['post'],

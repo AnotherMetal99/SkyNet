@@ -36,8 +36,8 @@
     import PageLayout from '@/Layouts/PageLayout'
     import BlockPosts from '@/Components/Dashboard/BlockPosts'
     import FormPost from '@/Components/Dashboard/FormPost'
-    import BlockFolow from '@/Components/BlockFolow'
-    import Status from '@/Components/Status'
+    import BlockFolow from '@/Components/Followers/BlockFolow'
+    import Status from '@/Components/Like/Status'
     import InfiniteScroll from '@/Components/InfiniteScroll'
     export default {
        props: ['profile','friendsWith','friendPendingFrom','friendSentTo','posts', 'requests'],

@@ -44,9 +44,9 @@
 
 <script>
     import { FingerprintSpinner } from 'epic-spinners'
-    import Accept from './Accept'
+    import Accept from '@/Components/Followers/Accept'
     import AddButton from '@/Components/Dashboard/AddButton'
-    import Ignore from './Ignore'
+    import Ignore from '@/Components/Followers/Ignore'
     import JetDangerButton from '@/Jetstream/DangerButton'
     export default {
         props: ['profile','friendsWith','friendPendingFrom','friendSentTo'],

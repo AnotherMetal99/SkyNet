@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import CommentItem from '@/Components/CommentItem'
+    import CommentItem from '@/Components/Comments/CommentItem'
     export default {
         props: ['comments'],
         components: {

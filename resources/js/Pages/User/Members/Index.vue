@@ -23,7 +23,7 @@
 
 <script>
     import PageLayout from '@/Layouts/PageLayout'
-    import Member from '@/Components/Member'
+    import Member from '@/Components/Followers/Member'
     import InfiniteScroll from '@/Components/InfiniteScroll'
     export default {
        props: ['members'],

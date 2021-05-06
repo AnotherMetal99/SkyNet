@@ -39,8 +39,8 @@
 </template>
 
 <script>
-    import Dislike from '@/Components/Dislike'
-    import Like from '@/Components/Like'
+    import Dislike from '@/Components/Like/Dislike'
+    import Like from '@/Components/Like/Like'
     export default {
         props: ['comment'],
         components: {

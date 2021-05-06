@@ -38,7 +38,7 @@
 
 <script>
     import PageLayout from '@/Layouts/PageLayout'
-    import BlockFolow from '@/Components/BlockFolow'
+    import BlockFolow from '@/Components//Followers/BlockFolow'
     export default {
         props: ['friends', 'requests'],
         components: {

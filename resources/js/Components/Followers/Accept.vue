@@ -16,7 +16,7 @@
 
 <script>
 import { FingerprintSpinner } from 'epic-spinners'
-    import FriendButton from '@/Components/FriendButton'
+    import FriendButton from '@/Components/Followers/FriendButton'
     export default {
         props: ['profile'],
         components: {
