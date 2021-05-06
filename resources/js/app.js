@@ -5,6 +5,7 @@ import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 
+
 window.Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -16,6 +17,7 @@ window.Toast = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
 })
+
 
 const el = document.getElementById('app');
 

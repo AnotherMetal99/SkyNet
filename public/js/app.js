@@ -19596,7 +19596,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[3] || (_cache[3] = function () {
       return $props.method && $props.method.apply($props, arguments);
     })
-  }, "Отапрвить", 10
+  }, "Отправить", 10
   /* CLASS, PROPS */
   , ["disabled"])]);
 }
@@ -20407,7 +20407,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   name: "thumbs-down",
   "class": " w-3 h-3 ml-1 fill-current hover:text-red-600"
-}, " dislike")], -1
+}, "👎")], -1
 /* HOISTED */
 );
 
@@ -20448,7 +20448,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   name: "thumbs-up",
   "class": "w-3 h-3 ml-1 fill-current hover:text-green-600"
-}, "like")], -1
+}, "👍")], -1
 /* HOISTED */
 );
 
